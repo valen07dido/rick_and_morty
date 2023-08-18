@@ -1,0 +1,30 @@
+.divBarra{
+    position: relative;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    background-color:   rgba(249, 246, 246, 0.2); 
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    border-radius: 10px;
+
+}
+.inputBar{
+    width:50%;
+    height:100%;
+    padding:5px;
+    margin:10px;
+    border-radius: 5px;
+}
+.boton{
+    margin-left:50px ;
+    padding: 5px;
+    border-radius: 5px;
+    border-color: white;
+    background-color: black;
+    color: white;
+      &:hover{
+        background-color: white;
+        color: black;
+    }
+}

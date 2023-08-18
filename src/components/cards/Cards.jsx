@@ -10,17 +10,27 @@
 // }
 // Importamos React y el componente Card
 import React from 'react';
-import Card from './Card';
-
+import Card from '../card/Card';
+import style from './cards.module.css'
 // Creamos el componente Characters como una función que recibe las props
 export default function Characters(props) {
   // Retornamos un elemento div que contiene las Cards
   return (
-    <div>
+    <div className={style.contenedor}>
       {/* Usamos el método map para devolver un componente Card por cada personaje */}
       {props.characters.map((character) => (
         // Pasamos el objeto character como props al componente Card y le asignamos una key con el id del personaje
-        <Card key={character.id} {...character} />
+        <Card 
+          key={character.id}
+          name={character.name}
+          status={character.status}
+          species={character.species}
+          gender={character.gender}
+          origin={character.origin.name}
+          image={character.image}
+          onClose={() => window.alert('Emulamos que se cierra la card')}
+          
+        />  
       ))}
     </div>
   );
