@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import style from './card.module.css';
 
 export default function Card(props) {
-  const { onClose, name, status, species, gender, origin, image } = props;
+  const { id, name, status, species, gender, origin, image,onClose} = props;
 
-  // Estado local para controlar la visualización de los detalles
+  // // Estado local para controlar la visualización de los detalles
   const [showDetails, setShowDetails] = useState(false);
 
-  // Función para cambiar el estado de los detalles
+  // // Función para cambiar el estado de los detalles
   const toggleDetails = () => {
     setShowDetails(!showDetails);
   };
 
   return (
     <div className={style.contenedor}>
-      <button onClick={onClose} className={style.ex}>
+      <button onClick={()=> onClose(id)} className={style.ex}>
         X
       </button>
       <div className={style.carta}>

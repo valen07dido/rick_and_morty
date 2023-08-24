@@ -39,8 +39,10 @@
     }
 }
 .datos{
-    color: white;
-    -webkit-text-stroke: 0.5px  
-    rgb(0, 0, 0);
+    color: rgb(16, 13, 13);
+    -webkit-text-stroke: 0.2px  white;
+   
+    margin: 10px;
+    border-radius: 10px;
 }
     

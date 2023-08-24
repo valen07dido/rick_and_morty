@@ -13,8 +13,9 @@ import React from 'react';
 import Card from '../card/Card';
 import style from './cards.module.css'
 // Creamos el componente Characters como una función que recibe las props
-export default function Characters(props) {
+const Characters=(props)=> {
   // Retornamos un elemento div que contiene las Cards
+  const {onClose}=props
   return (
     <div className={style.contenedor}>
       {/* Usamos el método map para devolver un componente Card por cada personaje */}
@@ -22,16 +23,18 @@ export default function Characters(props) {
         // Pasamos el objeto character como props al componente Card y le asignamos una key con el id del personaje
         <Card 
           key={character.id}
+          id={character.id}
           name={character.name}
           status={character.status}
           species={character.species}
           gender={character.gender}
           origin={character.origin.name}
           image={character.image}
-          onClose={() => window.alert('Emulamos que se cierra la card')}
+          onClose={onClose}
           
         />  
       ))}
     </div>
   );
 }
+export default Characters
