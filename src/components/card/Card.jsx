@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import style from './card.module.css';
+import { Link } from 'react-router-dom';
+
 
 export default function Card(props) {
   const { id, name, status, species, gender, origin, image,onClose} = props;
@@ -18,7 +20,9 @@ export default function Card(props) {
         X
       </button>
       <div className={style.carta}>
-        <h2 className={style.datos}>Nombre: {name}</h2>
+      <Link to={`/detail/${id}`} >
+         <h2 className={style.datos}>Nombre: {name}</h2>
+      </Link>
         <h2 className={style.datos}>Estado: {status}</h2>
         <h2 className={style.datos}>Especie: {species}</h2>
         {/* Mostrar detalles solo si showDetails es verdadero */}

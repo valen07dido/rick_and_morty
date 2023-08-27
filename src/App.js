@@ -4,10 +4,12 @@ import Cards from './components/cards/Cards.jsx';
 import { useState } from 'react';
 import axios from 'axios';
 import BarraNav from './components/nav/barraNav';
+import { Route, Routes } from "react-router-dom";
+import About from "./components/about/about.jsx";
+import Detail from "./components/detail/detail.jsx";
+import PATHROUTES from "./helpers/PathRoutes.helper.js";
 
-
-
-function App() {
+const App=()=> {
 
 
 const [characters, setCharacters]=useState([])
@@ -32,10 +34,12 @@ const onSearch = (id) => {
 
    return (
       <div className='App'>
-        <BarraNav onSearch={onSearch}/>
-
-        <Cards characters={characters} onClose={onClose} />
-    
+         <BarraNav onSearch={onSearch}/>
+         <Routes>
+         <Route path={PATHROUTES.HOME} element={<Cards characters={characters} onClose={onClose} />}/>
+        <Route path={PATHROUTES.ABOUT} element={<About/>}/>
+        <Route path={PATHROUTES.DETAIL} element={<Detail />}/>
+         </Routes>
       </div>
    );
 }

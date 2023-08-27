@@ -5,7 +5,7 @@ export default function SearchBar(props) {
 
 const handleChange=(event)=>{
   setid(event.target.value)
-  console.log(id)
+
 }
 
    const {onSearch} =props
