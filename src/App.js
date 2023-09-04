@@ -9,8 +9,10 @@ import Detail from "./components/detail/detail.jsx";
 import PATHROUTES from "./helpers/PathRoutes.helper.js";
 import Form from './components/form/form';
 import { useLocation,useNavigate } from 'react-router-dom';
+import Favorites from './components/favorites/favorites';
 
 const App=()=> {
+
 
 const navigate=useNavigate()
 const [access, setAccess] = useState(false);
@@ -55,6 +57,8 @@ const onSearch = (id) => {
         <Route path={PATHROUTES.ABOUT} element={<About/>}/>
         <Route path={PATHROUTES.DETAIL} element={<Detail />}/>
         <Route path={PATHROUTES.FORM} element={<Form login={login}/>}/>
+        <Route path={PATHROUTES.FAVORITES} element={<Favorites/>}/>
+
          </Routes>
       </div>
    );

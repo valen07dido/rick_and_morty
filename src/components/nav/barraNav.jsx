@@ -15,6 +15,9 @@
           <Link to={'/home'}>
           <button className={style.boton}>Home</button>
           </Link>
+          <Link to={'/favorites'}>
+          <button className={style.boton}>favorites</button>
+          </Link>
           </div>
           
       </div>

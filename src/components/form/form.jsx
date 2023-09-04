@@ -1,5 +1,8 @@
 import { useState } from "react"
 import validator from "./validation"
+import imgLogin from "./imgForm/logo login.png"
+import encabezado from "./imgForm/encabezado.png"
+import style from "./form.module.css"
 
 
 const Form = (props) => {
@@ -21,27 +24,31 @@ const Form = (props) => {
     setUserData({...userData, [e.target.name]: e.target.value})
   }
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
+      <img src={imgLogin} alt="" className={style.logo}/>
+    <form onSubmit={handleSubmit} className={style.Form}>
       <label htmlFor="email">Email:</label>
       <input type="text" name="email" placeholder="tu email...📧" value={userData.email} onChange={handleChange}/>
       { errors.e2 ? (
         <p>{errors.e2}</p>
-      ):errors.e3 ? (
-        <p>{errors.e3}</p>
-      ):(
-        <p>{errors.e1}</p>
-      )}
+        ):errors.e3 ? (
+          <p>{errors.e3}</p>
+          ):(
+            <p>{errors.e1}</p>
+            )}
       <br />
       <label htmlFor="password">Password:</label>
       <input type="password" id="password" name="password" placeholder="constraseña...🙈" value={userData.password} onChange={handleChange}/>
       {errors.p1 ? (
         <p>{errors.p1}</p>
-      ):(
-        <p>{errors.p2}</p>
-      )}
+        ):(
+          <p>{errors.p2}</p>
+          )}
       <br />
       <button>Submit</button>
     </form>
+<img src={encabezado} alt="" className={style.encabezado  } />
+          </div>
   )
 }
 

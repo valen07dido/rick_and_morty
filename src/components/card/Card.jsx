@@ -1,43 +1,92 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './card.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { addFav, removeFav } from '../../redux/actions';
+// import Characters from '../cards/Cards';
+import { connect } from 'react-redux';
 
 
-export default function Card(props) {
-  const { id, name, status, species, gender, origin, image,onClose} = props;
+const Card=({ character,myFavorites, addFav, removeFav, ...props })=> {
+  const { id, name,image,onClose} = props;
+  const [isFav, setIsFav] = useState(false);
 
-  // // Estado local para controlar la visualización de los detalles
-  const [showDetails, setShowDetails] = useState(false);
+  // const [showDetails, setShowDetails] = useState(false);
 
-  // // Función para cambiar el estado de los detalles
-  const toggleDetails = () => {
-    setShowDetails(!showDetails);
-  };
+  // const toggleDetails = () => {
+    //   setShowDetails(!showDetails);
+    // };
+
+    const handleFavorite=()=>{
+      if (isFav) {
+        setIsFav(false);
+        removeFav(id);
+      } else {
+        setIsFav(true);
+        addFav(props);
+      }
+    };
+    useEffect(() => {
+      myFavorites.forEach((fav) => {
+         if (fav.id === props.id) {
+            setIsFav(true);
+         }
+      });
+   }, [myFavorites]);
+    
+    const {pathname}=useLocation()
 
   return (
     <div className={style.contenedor}>
+      {
+   isFav ? (
+      <button onClick={handleFavorite}>❤️</button>
+   ) : (
+      <button onClick={handleFavorite}>🤍</button>
+   )
+}
+
+{
+    pathname !== '/favorites' &&
       <button onClick={()=> onClose(id)} className={style.ex}>
         X
       </button>
+}
+
+
       <div className={style.carta}>
       <Link to={`/detail/${id}`} >
          <h2 className={style.datos}>Nombre: {name}</h2>
       </Link>
-        <h2 className={style.datos}>Estado: {status}</h2>
+        {/* <h2 className={style.datos}>Estado: {status}</h2>
         <h2 className={style.datos}>Especie: {species}</h2>
-        {/* Mostrar detalles solo si showDetails es verdadero */}
+     
         {showDetails && (
           <>
             <h2 className={style.datos}>Género: {gender}</h2>
             <h2 className={style.datos}>Origen: {origin}</h2>
           </>
         )}
-        {/* Botón "Ver Más" para mostrar u ocultar detalles */}
+      
         <button onClick={toggleDetails} className={style.verMas}>
           detalles
-        </button>
+        </button> */}
         <img src={image} alt={name} className={style.image} />
       </div>
     </div>
   );
 }
+
+
+
+
+const mapDispatchToProps = (dispatch) => ({
+  addFav: (Character) => dispatch(addFav(Character)),
+  removeFav: (id) => dispatch(removeFav(id))
+});
+
+const mapStateToProps = (state) => {
+  return {
+    myFavorites: state.myFavorites,
+  };
+};
+export default connect(mapStateToProps,mapDispatchToProps)(Card)

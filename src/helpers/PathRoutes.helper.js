@@ -2,7 +2,8 @@ const PATHROUTES = {
     HOME: '/home',
     ABOUT: '/about',
     DETAIL: '/detail/:id',
-    FORM:'/'
+    FORM:'/',
+    FAVORITES:'/favorites'
 }
 
 export default PATHROUTES
