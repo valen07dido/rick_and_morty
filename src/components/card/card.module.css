@@ -1,52 +1,63 @@
-.contenedor{
-    margin: 10px;
-    background-image: url(/img/kindpng_1302829.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: local;
-    width: 240px;
-   height:730px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    border-radius: 10px;
+.contenedor {
+  margin: 10px;
+  background-image: url(/img/kindpng_1302829.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: local;
+  width: 240px;
+  height: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  border-radius: 10px;
 }
-.image{ 
-    /* border-radius: 10px; */
-    border-style: solid;
-    border-color: rgb(100, 214, 85);
-    border-width: 5px;
-    margin: 10px;
-    width:220px;
-    height:220px;
+.image {
+  border-style: solid;
+  border-color: rgb(100, 214, 85);
+  border-width: 5px;
+  margin: 10px;
+  width: 220px;
+  height: 220px;
 }
-.ex{
-    background-color: greenyellow;
-    border-radius: 10px;
-    margin: 10px;
-    width: 30px;
-    height: 30px;
-    &:hover{
-        background-color: rgb(91, 255, 91);
-        cursor: pointer;
-        transform:scale(1.2);
-    }
-    
+.ex {
+  background-color: greenyellow;
+  border-radius: 10px;
+  margin: 20px;
+  width: 30px;
+  height: 30px;
+  &:hover {
+    background-color: rgb(91, 255, 91);
+    cursor: pointer;
+    transform: scale(1.2);
+  }
 }
-.verMas{
-    background-color: greenyellow;
-    &:hover{
-        background-color: green;
-        cursor: pointer;
-    }
+.verMas {
+  background-color: greenyellow;
+  &:hover {
+    background-color: green;
+    cursor: pointer;
+  }
 }
-.datos{
-    background-color: rgb(100, 214, 85);
-    color: rgb(16, 13, 13);
-    -webkit-text-stroke: 0.2px  white;
-   
-    margin: 10px;
-    border-radius: 10px;
+.datos {
+  background-color: rgb(100, 214, 85);
+  color: rgb(16, 13, 13);
+  -webkit-text-stroke: 0.2px white;
+  margin: 10px;
+  border-radius: 10px;
 }
-    
+.fav {
+  transform: scale(2);
+  background-color: rgba(255, 255, 255, 0);
+  height: 30px;
+  cursor: pointer;
+  margin: 20px;
+  border: none;
+  &:hover {
+    transform: scale(2.5);
+  }
+}
+.containerBotones {
+  display: flex;
+  justify-content: space-evenly;
+}

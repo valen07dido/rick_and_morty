@@ -24,7 +24,8 @@
     background-color: black;
     color: white;
       &:hover{
-        background-color: white;
-        color: black;
+        transform: scale(1.1);
+        background-color: rgb(29, 29, 29);
+    
     }
 }
