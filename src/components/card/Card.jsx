@@ -9,8 +9,8 @@ const Card = ({ character, myFavorites, addFav, removeFav, ...props }) => {
   const { id, name, image, onClose } = props;
   const [isFav, setIsFav] = useState(false);
 
+  // descomentar para hacer un boton que muestre mas detalles
   // const [showDetails, setShowDetails] = useState(false);
-
   // const toggleDetails = () => {
   //   setShowDetails(!showDetails);
   // };
@@ -58,7 +58,8 @@ const Card = ({ character, myFavorites, addFav, removeFav, ...props }) => {
         <Link to={`/detail/${id}`}>
           <h2 className={style.datos}>Nombre: {name}</h2>
         </Link>
-        {/* <h2 className={style.datos}>Estado: {status}</h2>
+        {/*descomentar para hacer un boton que muestre mas detalles
+         <h2 className={style.datos}>Estado: {status}</h2>
         <h2 className={style.datos}>Especie: {species}</h2>
      
         {showDetails && (

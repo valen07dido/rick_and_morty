@@ -6,25 +6,27 @@ import BarraNav from "./components/nav/barraNav";
 import { Route, Routes } from "react-router-dom";
 import About from "./components/about/about.jsx";
 import Detail from "./components/detail/detail.jsx";
-import PATHROUTES from "./helpers/PathRoutes.helper.js";
 import Form from "./components/form/form";
 import { useLocation, useNavigate } from "react-router-dom";
 import Favorites from "./components/favorites/favorites";
+import Error404 from "./components/error404/error404";
+import ProtectedRoute from "./components/protectedRoute/protectedRoute";
+import PATHROUTES from "./helpers/PathRoutes.helper";
 
 const App = () => {
   const navigate = useNavigate();
-  const [access, setAccess] = useState(false);
+  // const [access, setAccess] = useState(false);
+  const [access, setAccess] = useState(
+    localStorage.getItem("isLoggedIn") === true
+  );
   const EMAIL = "";
   const PASSWORD = "";
   const [characters, setCharacters] = useState([]);
 
-  useEffect(() => {
-    !access && navigate("/");
-  }, [access]);
-
   const login = (userData) => {
     if (userData.password === PASSWORD && userData.email === EMAIL) {
       setAccess(true);
+      localStorage.setItem("isLoggedIn", true);
       navigate("/home");
     }
   };
@@ -37,29 +39,48 @@ const App = () => {
   };
 
   const onSearch = (id) => {
-    axios(`https://rickandmortyapi.com/api/character/${id}`).then(
-      ({ data }) => {
-        if (data.name) {
-          setCharacters((oldChars) => [...oldChars, data]);
-        } else {
-          window.alert("¡No hay personajes con este ID!");
+    if (id > 826 || id === "") {
+      window.alert("no hay personajes con ese ID");
+    } else {
+      axios(`https://rickandmortyapi.com/api/character/${id}`).then(
+        ({ data }) => {
+          if (data.name) {
+            setCharacters((oldChars) => {
+              if (!oldChars.some((char) => char.id === data.id)) {
+                console.log("ese id ya esta");
+                return [...oldChars, data];
+              } else {
+                return oldChars;
+              }
+            });
+          } else if (id > 826) {
+            window.alert("¡No hay personajes con este ID!");
+          }
         }
-      }
-    );
+      );
+    }
   };
   const { pathname } = useLocation();
+  const formPage = pathname === PATHROUTES.FORM;
+  const ErrorPage = pathname === PATHROUTES.ERROR;
   return (
     <div className="App">
-      {pathname !== "/" && <BarraNav onSearch={onSearch} />}
+      {/* {pathname !== "/" && <BarraNav onSearch={onSearch} />} */}
+      {access === true && !ErrorPage && !formPage && (
+        <BarraNav onSearch={onSearch} />
+      )}
       <Routes>
-        <Route
-          path={PATHROUTES.HOME}
-          element={<Cards characters={characters} onClose={onClose} />}
-        />
-        <Route path={PATHROUTES.ABOUT} element={<About />} />
-        <Route path={PATHROUTES.DETAIL} element={<Detail />} />
         <Route path={PATHROUTES.FORM} element={<Form login={login} />} />
-        <Route path={PATHROUTES.FAVORITES} element={<Favorites />} />
+        <Route element={<ProtectedRoute canActivate={access} />}>
+          <Route
+            path={PATHROUTES.HOME}
+            element={<Cards characters={characters} onClose={onClose} />}
+          />
+          <Route path={PATHROUTES.ABOUT} element={<About />} />
+          <Route path={PATHROUTES.DETAIL} element={<Detail />} />
+          <Route path={PATHROUTES.FAVORITES} element={<Favorites />} />
+        </Route>
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </div>
   );

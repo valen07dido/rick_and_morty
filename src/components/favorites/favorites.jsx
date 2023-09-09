@@ -12,15 +12,15 @@ const Favorites = ({ myFavorites }) => {
 
   const handleOrder = (event) => {
     dispatch(orderCards(event.target.value));
-    setAux = !aux;
+    setAux(!aux);
   };
   const handleFilter = (event) => {
     dispatch(filterCards(event.target.value));
   };
 
   return (
-  <div>
-       <select name="" id="" onChange={handleOrder}>
+    <div>
+      <select name="" id="" onChange={handleOrder}>
         <option value="A">Ascendente</option>
         <option value="D">Descendente</option>
       </select>
@@ -31,22 +31,21 @@ const Favorites = ({ myFavorites }) => {
         <option value="unknown">unknown</option>
       </select>
 
-    <div className={styles.container}>
-   
-      {myFavorites.map((character) => (
-        <Card
-        key={character.id}
-        id={character.id}
-        name={character.name}
-        status={character.status}
-        species={character.species}
-        gender={character.gender}
-        origin={character.origin.name}
-        image={character.image}
-        />
+      <div className={styles.container}>
+        {myFavorites.map((character) => (
+          <Card
+            key={character.id}
+            id={character.id}
+            name={character.name}
+            status={character.status}
+            species={character.species}
+            gender={character.gender}
+            origin={character.origin.name}
+            image={character.image}
+          />
         ))}
+      </div>
     </div>
-</div>
   );
 };
 

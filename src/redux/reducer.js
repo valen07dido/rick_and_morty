@@ -1,8 +1,8 @@
-import { ADD_FAV,REMOVE_FAV,FILTER,ORDER } from "./actions";
+import { ADD_FAV, REMOVE_FAV, FILTER, ORDER } from "./actions";
 
 const initialState = {
   myFavorites: [],
-  allCharacters:[]
+  allCharacters: [],
 };
 
 const rootReducer = (state = initialState, actions) => {
@@ -10,37 +10,42 @@ const rootReducer = (state = initialState, actions) => {
     case ADD_FAV:
       return {
         ...state,
-        myFavorites:[...state.myFavorites, actions.payload],
-        allCharacters: [...state.myFavorites, actions.payload]
+        myFavorites: [...state.myFavorites, actions.payload],
+        allCharacters: [...state.myFavorites, actions.payload],
       };
     case REMOVE_FAV:
       return {
         ...state,
         myFavorites: state.myFavorites.filter(
           (character) => character.id !== Number(actions.payload)
-        )
+        ),
       };
-      case FILTER:
-        const filtrado=state.allCharacters.filter(
-          (character)=>character.gender === (actions.payload)
-        )
-        return{
-          ...state,
-          myFavorites:filtrado
+    case FILTER:
+      const filtrado = state.allCharacters.filter(
+        (character) => character.gender === actions.payload
+      );
+      return {
+        ...state,
+        myFavorites: filtrado,
+      };
+
+    case ORDER:
+      let copy = state.allCharacters.sort((a, b) => {
+        if (actions.payload === "A") {
+          return a.id - b.id;
+        } else if (actions.payload === "D") {
+          return b.id - a.id;
+        } else {
+          return 0;
         }
-        case ORDER:
-          let copy=[...state.allCharacters]
-          if(actions.payload ==='A') {
-           copy=copy.sort((a,b)=>a.id-b.id)}
-          if(actions.payload ==='B') {
-            copy=copy.sort((a,b)=>b.id-a.id)}
-          return{
-            ...state,
-            myFavorites:copy
-          }
+      });
+      return {
+        ...state,
+        myFavorites: copy,
+      };
     default:
       return {
-        ...state
+        ...state,
       };
   }
 };

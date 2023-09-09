@@ -1,9 +1,9 @@
 const PATHROUTES = {
-    HOME: '/home',
-    ABOUT: '/about',
-    DETAIL: '/detail/:id',
-    FORM:'/',
-    FAVORITES:'/favorites'
-}
-
-export default PATHROUTES
+  FORM: "/",
+  HOME: "/home",
+  ABOUT: "/about",
+  DETAIL: "/detail/:id",
+  FAVORITES: "/favorites",
+  ERROR: "*",
+};
+export default PATHROUTES;
