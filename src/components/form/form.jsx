@@ -60,7 +60,7 @@ const Form = (props) => {
           />
           {errors.p1 ? <p>{errors.p1}</p> : <p>{errors.p2}</p>}
           <br />
-        <button className={style.botonSubmit}>Submit</button>
+          <button className={style.botonSubmit}>Submit</button>
         </div>
         <div>
           <img src={encabezado} alt="" className={style.encabezado} />
