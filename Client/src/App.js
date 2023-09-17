@@ -13,10 +13,13 @@ import Favorites from "./components/favorites/favorites";
 import Error404 from "./components/error404/error404";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute";
 import PATHROUTES from "./helpers/PathRoutes.helper";
+import { removeFav } from "./redux/actions";
+import { useDispatch } from "react-redux";
 
 const App = () => {
   const navigate = useNavigate();
-  // const [access, setAccess] = useState(false);
+  // const [access, setAccess] = useState(false);c
+const Dispatch=useDispatch()
   const [access, setAccess] = useState(
     localStorage.getItem("isLoggedIn") === true
   );
@@ -42,6 +45,7 @@ const App = () => {
         return char.id !== Number(id);
       })
     );
+     Dispatch(removeFav(id))
   };
 
   const onSearch = (id) => {
