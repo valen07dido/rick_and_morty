@@ -11,7 +11,7 @@ const SearchBar = (props) => {
     setid(event.target.value);
   };
 
-  const { onSearch } = props;
+  const { onSearch, logOut } = props;
   return (
     <div className={styles.divBarra}>
       <input
@@ -35,6 +35,10 @@ const SearchBar = (props) => {
         }}
         className={styles.boton}
         >Agregar random</button>
+
+        
+      <button onClick={logOut} className={styles.botonLogOut}>
+      </button>
     </div>
   );
 };

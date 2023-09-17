@@ -1,26 +1,25 @@
-    import React from "react";
-  import SearchBar from "../searchbar/SearchBar";
-  import style from './barraNav.module.css'
-  import { Link} from "react-router-dom";
+import React from "react";
+import SearchBar from "../searchbar/SearchBar";
+import style from "./barraNav.module.css";
+import { Link } from "react-router-dom";
 
-  const BarraNav = (props) => {
-      const {onSearch} =  props;
-    return (
-      <div className={style.header}>
-          <SearchBar onSearch={onSearch} />
-          <div>
-            <Link to={'/about'}>
+const BarraNav = (props) => {
+  const { onSearch, logOut } = props;
+  return (
+    <div className={style.header}>
+      <SearchBar onSearch={onSearch} logOut={logOut} />
+      <div>
+        <Link to={"/about"}>
           <button className={style.boton}>About</button>
-          </Link> 
-          <Link to={'/home'}>
+        </Link>
+        <Link to={"/home"}>
           <button className={style.boton}>Home</button>
-          </Link>
-          <Link to={'/favorites'}>
+        </Link>
+        <Link to={"/favorites"}>
           <button className={style.boton}>favorites</button>
-          </Link>
-          </div>
-          
+        </Link>
       </div>
-    )
-  }
-  export default BarraNav;
+    </div>
+  );
+};
+export default BarraNav;

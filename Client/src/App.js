@@ -31,6 +31,11 @@ const App = () => {
       navigate("/home");
     }
   };
+
+  const logOut = () => {
+    setAccess(false);
+    navigate('/')
+  };
   const onClose = (id) => {
     setCharacters(
       characters.filter((char) => {
@@ -48,7 +53,7 @@ const App = () => {
           if (data.name) {
             setCharacters((oldChars) => {
               if (!oldChars.some((char) => char.id === data.id)) {
-                 console.log("ese id ya esta");
+                console.log("ese id ya esta");
                 return [...oldChars, data];
               } else {
                 return oldChars;
@@ -68,7 +73,7 @@ const App = () => {
     <div className="App">
       {/* {pathname !== "/" && <BarraNav onSearch={onSearch} />} */}
       {access === true && !ErrorPage && !formPage && (
-        <BarraNav onSearch={onSearch} />
+        <BarraNav onSearch={onSearch} logOut={logOut}/>
       )}
       <Routes>
         <Route path={PATHROUTES.FORM} element={<Form login={login} />} />
