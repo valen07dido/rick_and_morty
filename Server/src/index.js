@@ -1,5 +1,5 @@
 const http = require('http');
-const data = require('../src/utils/data');
+const data = require('./utils/data');
 
 http.createServer((req, res) => {
     const { url } = req;
@@ -19,4 +19,4 @@ http.createServer((req, res) => {
         res.writeHead(404);
         res.end();
     }
-}).listen(3001);
+}).listen(3001, 'localhost');   
