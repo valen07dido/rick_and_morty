@@ -49,7 +49,7 @@ const Dispatch=useDispatch()
   };
 
   const onSearch = (id) => {
-    if (id > 6 || id === "") {
+    if (id > 826 || id === "") {
       window.alert("no hay personajes con ese ID");
     } else {
       axios(`http://localhost:3001/rickandmorty/character/${id}`).then(
@@ -63,7 +63,7 @@ const Dispatch=useDispatch()
                 return oldChars;
               }
             });
-          } else if (id > 6) {
+          } else if (id > 826) {
             window.alert("¡No hay personajes con este ID!");
           }
         }

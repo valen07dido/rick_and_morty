@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const SearchBar = (props) => {
   const min = 1;
-  const max = 5;
+  const max = 826;
   const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
   const [id, setid] = useState("");
 
