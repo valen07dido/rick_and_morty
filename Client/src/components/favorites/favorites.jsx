@@ -7,11 +7,13 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 
 const Favorites = ({ myFavorites }) => {
-  let [aux, setAux] = useState(false);
   const dispatch = useDispatch();
+ 
 
-  const handleOrder = (event) => {
-    dispatch(orderCards(event.target.value));
+  const [aux, setAux] = useState(false);
+
+  const handleOrder = (e) => {
+    dispatch(orderCards(e.target.value));
     setAux(!aux);
   };
   const handleFilter = (event) => {
@@ -40,7 +42,7 @@ const Favorites = ({ myFavorites }) => {
             status={character.status}
             species={character.species}
             gender={character.gender}
-            origin={character.origin.name}
+            origin={character.origin}
             image={character.image}
           />
         ))}

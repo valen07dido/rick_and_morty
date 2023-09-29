@@ -23,17 +23,19 @@ const Dispatch=useDispatch()
   const [access, setAccess] = useState(
     localStorage.getItem("isLoggedIn") === true
   );
-  const EMAIL = "";
-  const PASSWORD = "";
+  // const EMAIL = "";
+  // const PASSWORD = "";
   const [characters, setCharacters] = useState([]);
 
-  const login = (userData) => {
-    if (userData.password === PASSWORD && userData.email === EMAIL) {
-      setAccess(true);
-      localStorage.setItem("isLoggedIn", true);
-      navigate("/home");
-    }
-  };
+  function login(userData) {
+    const { email, password } = userData;
+    const URL = 'http://localhost:3001/rickandmorty/login/';
+    axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+       const { access } = data;
+       setAccess(data);
+       access && navigate('/home');
+    });
+ }
 
   const logOut = () => {
     setAccess(false);
@@ -42,7 +44,7 @@ const Dispatch=useDispatch()
   const onClose = (id) => {
     setCharacters(
       characters.filter((char) => {
-        return char.id !== Number(id);
+        return char.id !== id;
       })
     );
      Dispatch(removeFav(id))
@@ -72,10 +74,10 @@ const Dispatch=useDispatch()
   };
   const { pathname } = useLocation();
   const formPage = pathname === PATHROUTES.FORM;
-  const ErrorPage = pathname === PATHROUTES.ERROR;
+  const ErrorPage = pathname === PATHROUTES.ERROR;    
   return (
     <div className="App">
-      {/* {pathname !== "/" && <BarraNav onSearch={onSearch} />} */}
+      {pathname !== "/" && <BarraNav onSearch={onSearch} />}
       {access === true && !ErrorPage && !formPage && (
         <BarraNav onSearch={onSearch} logOut={logOut}/>
       )}

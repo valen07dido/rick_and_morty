@@ -1,39 +1,31 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER } from "./actions";
-
 const initialState = {
   myFavorites: [],
   allCharacters: [],
 };
 
-const rootReducer = (state = initialState, actions) => {
-  switch (actions.type) {
-    case ADD_FAV:
+const rootReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
+    case "ADD_FAV":
+      return { ...state, myFavorites: payload, allCharacters: payload };
+
+    case "REMOVE_FAV":
+      return { ...state, myFavorites: payload };
+
+    case "FILTER":
+      // eslint-disable-next-line no-case-declarations
+      let copy = state.allCharacters.filter((char) => char.gender === payload);
       return {
         ...state,
-        myFavorites: [...state.myFavorites, actions.payload],
-        allCharacters: [...state.myFavorites, actions.payload],
-      };
-    case REMOVE_FAV:
-      return {
-        ...state,
-        myFavorites: state.myFavorites.filter(
-          (character) => character.id !== Number(actions.payload)
-        ),
-      };
-    case FILTER:
-      const filtrado = state.allCharacters.filter(
-        (character) => character.gender === actions.payload
-      );
-      return {
-        ...state,
-        myFavorites: filtrado,
+        myFavorites: copy,
+        allCharacters: copy,
       };
 
-    case ORDER:
-      let copy = state.allCharacters.sort((a, b) => {
-        if (actions.payload === "A") {
+    case "ORDER":
+      // eslint-disable-next-line no-case-declarations
+      let copy4 = state.allCharacters.sort((a, b) => {
+        if (payload === "A") {
           return a.id - b.id;
-        } else if (actions.payload === "D") {
+        } else if (payload === "D") {
           return b.id - a.id;
         } else {
           return 0;
@@ -41,8 +33,9 @@ const rootReducer = (state = initialState, actions) => {
       });
       return {
         ...state,
-        myFavorites: copy,
+        myFavorites: copy4,
       };
+
     default:
       return {
         ...state,
