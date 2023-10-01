@@ -26,16 +26,28 @@ const Dispatch=useDispatch()
   // const EMAIL = "";
   // const PASSWORD = "";
   const [characters, setCharacters] = useState([]);
-
-  function login(userData) {
+//! VER LOGIN
+  async function login(userData) {
     const { email, password } = userData;
     const URL = 'http://localhost:3001/rickandmorty/login/';
-    axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
-       const { access } = data;
-       setAccess(data);
-       access && navigate('/home');
-    });
- }
+    
+    try {
+      const response = await axios(URL + `?email=${email}&password=${password}`);
+      const { access } = response.data;
+  
+      if (access) {
+        setAccess(true);
+        localStorage.setItem("isLoggedIn", true);
+        navigate('/home');
+      } else {
+        setAccess(false);
+        localStorage.setItem("isLoggedIn", false);
+        window.alert("Credenciales inválidas");
+      }
+    } catch (error) {
+      console.error({error: error.message});
+    }
+  }
 
   const logOut = () => {
     setAccess(false);
@@ -50,26 +62,29 @@ const Dispatch=useDispatch()
      Dispatch(removeFav(id))
   };
 
-  const onSearch = (id) => {
+  const onSearch = async (id) => {
     if (id > 826 || id === "") {
       window.alert("no hay personajes con ese ID");
     } else {
-      axios(`http://localhost:3001/rickandmorty/character/${id}`).then(
-        ({ data }) => {
-          if (data.name) {
-            setCharacters((oldChars) => {
-              if (!oldChars.some((char) => char.id === data.id)) {
-                console.log("ese id ya esta");
-                return [...oldChars, data];
-              } else {
-                return oldChars;
-              }
-            });
-          } else if (id > 826) {
-            window.alert("¡No hay personajes con este ID!");
-          }
+      try {
+        const response = await axios(`http://localhost:3001/rickandmorty/character/${id}`);
+        const data = response.data;
+  
+        if (data.name) {
+          setCharacters((oldChars) => {
+            if (!oldChars.some((char) => char.id === data.id)) {
+              console.log("ese id ya esta");
+              return [...oldChars, data];
+            } else {
+              return oldChars;
+            }
+          });
+        } else if (id > 826) {
+          window.alert("¡No hay personajes con este ID!");
         }
-      );
+      } catch (error) {
+        console.error({error: error.message});
+      }
     }
   };
   const { pathname } = useLocation();
@@ -77,7 +92,7 @@ const Dispatch=useDispatch()
   const ErrorPage = pathname === PATHROUTES.ERROR;    
   return (
     <div className="App">
-      {pathname !== "/" && <BarraNav onSearch={onSearch} />}
+      {/* {pathname !== "/" && <BarraNav onSearch={onSearch} />} */}
       {access === true && !ErrorPage && !formPage && (
         <BarraNav onSearch={onSearch} logOut={logOut}/>
       )}
