@@ -18,40 +18,34 @@ import { useDispatch } from "react-redux";
 
 const App = () => {
   const navigate = useNavigate();
-  // const [access, setAccess] = useState(false);c
-const Dispatch=useDispatch()
-  const [access, setAccess] = useState(
-    localStorage.getItem("isLoggedIn") === true
-  );
-  // const EMAIL = "";
-  // const PASSWORD = "";
+  const [access, setAccess] = useState(false);
+  const Dispatch = useDispatch();
+
   const [characters, setCharacters] = useState([]);
-//! VER LOGIN
-  async function login(userData) {
+  //   const EMAIL = "";
+  // const PASSWORD = "";
+
+  function login(userData) {
     const { email, password } = userData;
-    const URL = 'http://localhost:3001/rickandmorty/login/';
-    
-    try {
-      const response = await axios(URL + `?email=${email}&password=${password}`);
-      const { access } = response.data;
-  
-      if (access) {
-        setAccess(true);
-        localStorage.setItem("isLoggedIn", true);
-        navigate('/home');
-      } else {
-        setAccess(false);
-        localStorage.setItem("isLoggedIn", false);
-        window.alert("Credenciales inválidas");
-      }
-    } catch (error) {
-      console.error({error: error.message});
-    }
+    const URL = "http://localhost:3001/rickandmorty/login/";
+    axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+      const { access } = data;
+      setAccess(data);
+      access && navigate("/home");
+    }).catch((error)=>{
+      window.alert('usuario no registrado')
+    });
   }
+  //  function login(userData) {
+  //   if (userData.password === PASSWORD && userData.email === EMAIL) {
+  //     setAccess(true);
+  //     navigate("/home");
+  //   }
+  // }
 
   const logOut = () => {
     setAccess(false);
-    navigate('/')
+    navigate("/");
   };
   const onClose = (id) => {
     setCharacters(
@@ -59,7 +53,7 @@ const Dispatch=useDispatch()
         return char.id !== id;
       })
     );
-     Dispatch(removeFav(id))
+    Dispatch(removeFav(id));
   };
 
   const onSearch = async (id) => {
@@ -67,9 +61,11 @@ const Dispatch=useDispatch()
       window.alert("no hay personajes con ese ID");
     } else {
       try {
-        const response = await axios(`http://localhost:3001/rickandmorty/character/${id}`);
+        const response = await axios(
+          `http://localhost:3001/rickandmorty/character/${id}`
+        );
         const data = response.data;
-  
+
         if (data.name) {
           setCharacters((oldChars) => {
             if (!oldChars.some((char) => char.id === data.id)) {
@@ -83,18 +79,18 @@ const Dispatch=useDispatch()
           window.alert("¡No hay personajes con este ID!");
         }
       } catch (error) {
-        console.error({error: error.message});
+        console.error({ error: error.message });
       }
     }
   };
   const { pathname } = useLocation();
   const formPage = pathname === PATHROUTES.FORM;
-  const ErrorPage = pathname === PATHROUTES.ERROR;    
+  const ErrorPage = pathname === PATHROUTES.ERROR;
   return (
     <div className="App">
-      {/* {pathname !== "/" && <BarraNav onSearch={onSearch} />} */}
+      {pathname !== "/" && <BarraNav onSearch={onSearch} />}
       {access === true && !ErrorPage && !formPage && (
-        <BarraNav onSearch={onSearch} logOut={logOut}/>
+        <BarraNav onSearch={onSearch} logOut={logOut} />
       )}
       <Routes>
         <Route path={PATHROUTES.FORM} element={<Form login={login} />} />
