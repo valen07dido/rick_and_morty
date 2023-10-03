@@ -17,7 +17,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         myFavorites: copy,
-        allCharacters: copy,
+  
       };
 
     case "ORDER":

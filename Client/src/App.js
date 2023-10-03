@@ -23,7 +23,6 @@ const App = () => {
 
   const [characters, setCharacters] = useState([]);
 
-
   async function login(userData) {
     const { email, password } = userData;
     const URL = "http://localhost:3001/rickandmorty/login/";
@@ -32,7 +31,6 @@ const App = () => {
         URL + `?email=${email}&password=${password}`
       );
       const { access } = data;
-      console.log(access)
       setAccess(data);
       if (access) navigate("/home");
     } catch (error) {
@@ -66,7 +64,6 @@ const App = () => {
         if (data.name) {
           setCharacters((oldChars) => {
             if (!oldChars.some((char) => char.id === data.id)) {
-              console.log("ese id ya esta");
               return [...oldChars, data];
             } else {
               return oldChars;
@@ -81,14 +78,11 @@ const App = () => {
     }
   };
   const { pathname } = useLocation();
-  const formPage = pathname === PATHROUTES.FORM;
-  const ErrorPage = pathname === PATHROUTES.ERROR;
+
   return (
     <div className="App">
-      {pathname !== "/" && <BarraNav onSearch={onSearch} />}
-      {access === true && !ErrorPage && !formPage && (
-        <BarraNav onSearch={onSearch} logOut={logOut} />
-      )}
+      {pathname !== "/" && <BarraNav onSearch={onSearch} logOut={logOut} />}
+
       <Routes>
         <Route path={PATHROUTES.FORM} element={<Form login={login} />} />
         <Route element={<ProtectedRoute canActivate={access} />}>
