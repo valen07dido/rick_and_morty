@@ -22,26 +22,23 @@ const App = () => {
   const Dispatch = useDispatch();
 
   const [characters, setCharacters] = useState([]);
-  //   const EMAIL = "";
-  // const PASSWORD = "";
 
-  function login(userData) {
+
+  async function login(userData) {
     const { email, password } = userData;
     const URL = "http://localhost:3001/rickandmorty/login/";
-    axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+    try {
+      const { data } = await axios(
+        URL + `?email=${email}&password=${password}`
+      );
       const { access } = data;
+      console.log(access)
       setAccess(data);
-      access && navigate("/home");
-    }).catch((error)=>{
-      window.alert('usuario no registrado')
-    });
+      if (access) navigate("/home");
+    } catch (error) {
+      window.alert("usuario no registrado");
+    }
   }
-  //  function login(userData) {
-  //   if (userData.password === PASSWORD && userData.email === EMAIL) {
-  //     setAccess(true);
-  //     navigate("/home");
-  //   }
-  // }
 
   const logOut = () => {
     setAccess(false);
