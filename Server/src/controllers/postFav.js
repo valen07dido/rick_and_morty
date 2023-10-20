@@ -1,21 +1,22 @@
+
 const { Favorite } = require("../DB_connection");
 
 const postFav = async (req, res) => {
-  let { name, origin, status, image, species, gender } = req.body;
+  const { name , status, image, species, gender } = req.body;
+  if (!name || !status || !image || !species || !gender)
+    return res.status(401).json({ msg: "Revisar los datos." });
+
   try {
-      // if (name || origin || status || image || species || gender) {
-      //   console.log('aca llego')
-      await Favorite.findOrCreate({
-        where: { name, origin, status, image, species, gender },
-      });
-      // const myFavorites = await Favorite.findAll();
-      // return res.status(201).json(myFavorites);
-      res.status(201).json({ name, origin, status, image, species, gender })
-    // }
-    return res.status(200).json(myFavorites);
+    await Favorite.findOrCreate({
+      where: { name },
+      defaults: {  status, image, species, gender },
+    });
+
+    const allFav = await Favorite.findAll();
+    return res.status(201).json(allFav);
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
-module.exports=postFav
+module.exports = postFav;

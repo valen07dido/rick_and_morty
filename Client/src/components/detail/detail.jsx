@@ -25,7 +25,7 @@ const Detail = () => {
       <h2>Status: {character?.status}</h2>
       <h2>Specie:{character?.species}</h2>
       <h2>Gender:{character?.gender}</h2>
-      <h2>Origin: {character.origin?.name}</h2>
+      <h2>Origin: {character?.origin}</h2>
       </div>
         <img src={character?.image} alt="" className={style.imagen}/>
     </div>
