@@ -1,20 +1,18 @@
-const User=require('../DB_connection')
-async function postUser(req,res){
+const {User}=require('../DB_connection')
+
+const postUser=async (req,res)=>{
 const {email,password}=req.body
-if (!email || !password || email.trim() === '' || password.trim() === '') {
-    return res.status(400).send('Faltan datos');
+try {
+  if(email&&password){
+    const [newUser]=await User.findOrCreate({
+      where:{email,password},
+    })
+    return res.status(201).json(newUser)
   }
+  return res.status(400).json({message:'Faltan datos'})
+} catch (error) {
+  return res.status(500).json({error:error.message})  
+}
+}
 
-  try {
-    // Create a new user
-    const newUser = await User.create({ email, password });
-
-    // Send the newly created user as a response
-    res.json(newUser);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error al crear el usuario');
-  }
-};
-
-module.export=postUser
+module.exports=postUser;
