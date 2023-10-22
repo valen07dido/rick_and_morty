@@ -8,7 +8,6 @@ import { useState } from "react";
 
 const Favorites = ({ myFavorites }) => {
   const dispatch = useDispatch();
- 
 
   const [aux, setAux] = useState(false);
 
@@ -22,17 +21,30 @@ const Favorites = ({ myFavorites }) => {
 
   return (
     <div>
-      <select name="" id="" onChange={handleOrder}>
-        <option value="A">Ascendente</option>
-        <option value="D">Descendente</option>
-      </select>
-      <select name="" id="" onChange={handleFilter}>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Genderless">Genderless</option>
-        <option value="unknown">unknown</option>
-      </select>
+      <div className={styles.contenedorSelect}>
+        <select
+          name=""
+          id=""
+          onChange={handleOrder}
+          className={styles.selectores}
+        >
+          <option value="A" className={styles.opciones}>Ascendente</option>
+          <option value="D" className={styles.opciones}>Descendente</option>
+        </select>
 
+        <select
+          name=""
+          id=""
+          onChange={handleFilter}
+          className={styles.selectores}
+        >
+          <option value="Male" className={styles.opciones}>Male</option>
+          <option value="Female" className={styles.opciones}>Female</option>
+          <option value="Genderless" className={styles.opciones}>Genderless</option>
+          <option value="unknown" className={styles.opciones}>unknown</option>
+        </select>
+
+      </div>
       <div className={styles.container}>
         {myFavorites.map((character) => (
           <Card

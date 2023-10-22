@@ -41,11 +41,18 @@
   font-weight: bold;
   padding: 10px;
   margin: -20px 0px 20px 0px;
-  &:hover {
-    transform: scale(1.2);
-    background-color: yellowgreen;
-  }
+  color: white;
+  border-radius: 20px;
+  background: linear-gradient(270deg, black, green);
+  background-size: 200% 200%;
+  transition: all 2s ease;
 }
+.botonSubmit:hover{
+  background-position: -100% 0;
+  transform: scale(1.1);
+}
+
+
 .datos {
   margin: 0% 35% 0% 35%;
   width: 30%;

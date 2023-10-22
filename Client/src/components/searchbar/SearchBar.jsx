@@ -6,6 +6,7 @@ const SearchBar = (props) => {
   const max = 826;
   const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
   const [id, setid] = useState("");
+  const [showLogoutText, setShowLogoutText] = useState(false); 
 
   const handleChange = (event) => {
     setid(event.target.value);
@@ -30,15 +31,24 @@ const SearchBar = (props) => {
       >
         Agregar
       </button>
-      <button onClick={() => {
-          onSearch(randomNumber)
+      <button
+        onClick={() => {
+          onSearch(randomNumber);
         }}
         className={styles.boton}
-        >Agregar random</button>
-
-        
-      <button onClick={logOut} className={styles.botonLogOut}>
+      >
+        Agregar random
       </button>
+
+      <button 
+        onClick={logOut} 
+        onMouseEnter={() => setShowLogoutText(true)} // Muestra el texto cuando el mouse entra
+        onMouseLeave={() => setShowLogoutText(false)} // Oculta el texto cuando el mouse sale
+        className={styles.botonLogOut}
+      >
+        🫂 {showLogoutText&& <p className={styles.cerrarSesion}>cerrar sesion</p>} 
+      </button>
+      
     </div>
   );
 };

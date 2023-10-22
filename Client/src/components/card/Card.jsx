@@ -30,6 +30,7 @@ const Card = ({ character, myFavorites, addFav, removeFav, ...props }) => {
         setIsFav(true);
       }
     });
+    // eslint-disable-next-line
   }, [myFavorites]);
 
   const { pathname } = useLocation();
