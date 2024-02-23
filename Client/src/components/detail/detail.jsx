@@ -7,7 +7,6 @@ const {REACT_APP_URL_BACKEND } = process.env;
 const Detail = () => {
   const { id } = useParams();
   const [character, setCharacter] = useState({});
-
   useEffect(() => {
     axios(`${REACT_APP_URL_BACKEND}/character/${id}`).then(({ data }) => {
       if (data.name) {
