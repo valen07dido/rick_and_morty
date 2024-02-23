@@ -5,7 +5,7 @@ const server = express();
 
 
 server.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://rick-and-morty-18ovlenrc-valen07didos-projects.vercel.app");
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",

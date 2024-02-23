@@ -3,10 +3,11 @@ import validator from "./validation";
 import imgLogin from "./imgForm/logo login.png";
 import encabezado from "./imgForm/encabezado.png";
 import style from "./form.module.css";
+import {useNavigate } from "react-router-dom";
 
 const Form = (props) => {
   const { login } = props;
-
+const navigate=useNavigate()
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -22,6 +23,10 @@ const Form = (props) => {
     setErrors(validator({ ...userData, [e.target.name]: e.target.value }));
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
+  const handleRegister=()=>{
+    console.log('hola')
+    navigate('/register')
+  }
   return (
     <div>
       <img src={imgLogin} alt="" className={style.logo} />
@@ -66,6 +71,11 @@ const Form = (props) => {
           <img src={encabezado} alt="" className={style.encabezado} />
         </div>
       </form>
+        <div>
+          <button className={style.register} onClick={handleRegister}>
+            no tienes usuario? registrate
+          </button>
+        </div>
     </div>
   );
 };

@@ -12,6 +12,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Favorites from "./components/favorites/favorites";
 import Error404 from "./components/error404/error404";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute";
+import FormRegistrer from "./components/formRegister/formRegistrer.jsx";
 import PATHROUTES from "./helpers/PathRoutes.helper";
 import { removeFav } from "./redux/actions";
 import { useDispatch } from "react-redux";
@@ -93,6 +94,7 @@ const App = () => {
           <Route path={PATHROUTES.ABOUT} element={<About />} />
           <Route path={PATHROUTES.DETAIL} element={<Detail />} />
           <Route path={PATHROUTES.FAVORITES} element={<Favorites />} />
+          <Route path={PATHROUTES.REGISTER} element={<FormRegistrer />} />
         </Route>
         <Route path="*" element={<Error404 />} />
       </Routes>

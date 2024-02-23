@@ -42,19 +42,33 @@
   padding: 10px;
   margin: -20px 0px 20px 0px;
   color: white;
+  cursor: pointer;
   border-radius: 20px;
   background: linear-gradient(270deg, black, green);
   background-size: 200% 200%;
   transition: all 2s ease;
 }
-.botonSubmit:hover{
+.botonSubmit:hover {
   background-position: -100% 0;
-  transform: scale(1.1);
 }
-
 
 .datos {
   margin: 0% 35% 0% 35%;
   width: 30%;
   border: 1px solid black;
+}
+.register {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  padding: 3px;
+  margin: -20px 0px 20px 0px;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  background: linear-gradient(270deg, black, green);
+  background-size: 200% 200%;
+  transition: all 2s ease;
+}
+.register:hover {
+  background-position: -100% 0;
 }
