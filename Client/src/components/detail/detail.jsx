@@ -2,13 +2,14 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styles from './detail.module.css'
+const {REACT_APP_URL_BACKEND } = process.env;
 
 const Detail = () => {
   const { id } = useParams();
   const [character, setCharacter] = useState({});
 
   useEffect(() => {
-    axios(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
+    axios(`${REACT_APP_URL_BACKEND}/character/${id}`).then(({ data }) => {
       if (data.name) {
         setCharacter(data);
       } else {

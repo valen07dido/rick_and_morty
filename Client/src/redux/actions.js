@@ -1,7 +1,8 @@
 import axios from "axios";
-
+const {REACT_APP_URL_BACKEND } = process.env;
+console.log(REACT_APP_URL_BACKEND)
 export const addFav = (character) => {
-  const endpoint = "http://localhost:3001/rickandmorty/fav";
+  const endpoint = `${REACT_APP_URL_BACKEND}/fav`;
   return async (dispatch) => {
     try {
       const {data} = await axios.post(endpoint, character);
@@ -16,7 +17,7 @@ export const addFav = (character) => {
 };
 
 export const removeFav = (id) => {
-  const endpoint = "http://localhost:3001/rickandmorty/fav/"+id;
+  const endpoint = `${REACT_APP_URL_BACKEND}/fav/${id}`;
   return async (dispatch) => {
     try {
       const response = await axios.delete(endpoint);
