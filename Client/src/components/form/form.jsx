@@ -28,6 +28,7 @@ const navigate=useNavigate()
   const handleRegister=()=>{
     navigate('/register')
    dispatch(access())
+   console.log('prueba')
   }
   return (
     <div>
