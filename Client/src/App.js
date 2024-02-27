@@ -21,6 +21,7 @@ const App = () => {
   const navigate = useNavigate();
   const [access, setAccess] = useState(false);
   const Dispatch = useDispatch();
+  console.log(access);
 
   const [characters, setCharacters] = useState([]);
 
@@ -94,7 +95,7 @@ const App = () => {
           <Route path={PATHROUTES.ABOUT} element={<About />} />
           <Route path={PATHROUTES.DETAIL} element={<Detail />} />
           <Route path={PATHROUTES.FAVORITES} element={<Favorites />} />
-          <Route path={PATHROUTES.REGISTER} element={<FormRegistrer />} />
+          <Route path={PATHROUTES.REGISTER} element={<FormRegistrer access={setAccess} />} />
         </Route>
         <Route path="*" element={<Error404 />} />
       </Routes>

@@ -44,3 +44,8 @@ export const orderCards = (order) => {
     payload: order,
   };
 };
+export const access=()=>{
+  return{
+    type:"ACCESS"
+  }
+}

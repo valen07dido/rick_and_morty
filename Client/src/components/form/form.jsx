@@ -4,9 +4,11 @@ import imgLogin from "./imgForm/logo login.png";
 import encabezado from "./imgForm/encabezado.png";
 import style from "./form.module.css";
 import {useNavigate } from "react-router-dom";
-
+import { access } from "../../redux/actions";
+import { useDispatch } from "react-redux";
 const Form = (props) => {
   const { login } = props;
+  const dispatch=useDispatch()
 const navigate=useNavigate()
   const [userData, setUserData] = useState({
     email: "",
@@ -24,8 +26,8 @@ const navigate=useNavigate()
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
   const handleRegister=()=>{
-    console.log('hola')
     navigate('/register')
+   dispatch(access())
   }
   return (
     <div>
