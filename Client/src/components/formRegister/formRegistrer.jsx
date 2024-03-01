@@ -9,27 +9,25 @@ const FormRegistrer = () => {
       <form action="" className={style.form}>
         <h1>ingrese sus datos:</h1>
         <div className={style.inputGroup}>
-          <input type="text" name="name" id="" required />
-          <label htmlFor="">nombre</label>
+          <input type="text" name="name" id="name" required />
+          <label htmlFor="name">Nombre completo</label>
         </div>
         <div className={style.inputGroup}>
-          <input type="text" name="email" id="" required  />
-          <label htmlFor="">email</label>
+          <input type="text" name="email" id="email" required />
+          <label htmlFor="email">email</label>
         </div>
         <div className={style.inputGroup}>
-          <input type="text" name="affair" id="" required  />
-          <label htmlFor="">Asunto</label>
+          <input type="password" name="password" id="password" required />
+          <label htmlFor="password">Contraseña</label>
         </div>
         <div className={style.inputGroup}>
-          <textarea
-            name="message"
-            placeholder="Ingrese su mensaje aqui..."
-            id=""
-            cols="100%"
-            rows="10"
+          <input
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
             required
-            className={style.message}
-          ></textarea>
+          />
+          <label htmlFor="confirmPassword">Repetir la contraseña</label>
         </div>
         <button>Registarse</button>
       </form>
