@@ -1,9 +1,6 @@
-import { access } from "./actions";
-
 const initialState = {
   myFavorites: [],
   allCharacters: [],
-  access:false
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -40,11 +37,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         allCharacters:copy4
       };
 
-      case "ACCESS":
-          return{
-            ...state,
-            access:!access
-          }
 
     default:
       return {

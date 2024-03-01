@@ -21,7 +21,6 @@ const App = () => {
   const navigate = useNavigate();
   const [access, setAccess] = useState(false);
   const Dispatch = useDispatch();
-  console.log(access);
 
   const [characters, setCharacters] = useState([]);
 
@@ -83,10 +82,16 @@ const App = () => {
 
   return (
     <div className="App">
-      {pathname !== "/" && <BarraNav onSearch={onSearch} logOut={logOut} />}
+      {pathname !== "/" && pathname !== "/register" && (
+        <BarraNav onSearch={onSearch} logOut={logOut} />
+      )}
 
       <Routes>
         <Route path={PATHROUTES.FORM} element={<Form login={login} />} />
+        <Route
+          path={PATHROUTES.REGISTER}
+          element={<FormRegistrer access={setAccess} />}
+        />
         <Route element={<ProtectedRoute canActivate={access} />}>
           <Route
             path={PATHROUTES.HOME}
@@ -95,7 +100,6 @@ const App = () => {
           <Route path={PATHROUTES.ABOUT} element={<About />} />
           <Route path={PATHROUTES.DETAIL} element={<Detail />} />
           <Route path={PATHROUTES.FAVORITES} element={<Favorites />} />
-          <Route path={PATHROUTES.REGISTER} element={<FormRegistrer access={setAccess} />} />
         </Route>
         <Route path="*" element={<Error404 />} />
       </Routes>

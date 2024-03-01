@@ -3,13 +3,10 @@ import validator from "./validation";
 import imgLogin from "./imgForm/logo login.png";
 import encabezado from "./imgForm/encabezado.png";
 import style from "./form.module.css";
-import {useNavigate } from "react-router-dom";
-import { access } from "../../redux/actions";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const Form = (props) => {
   const { login } = props;
-  const dispatch=useDispatch()
-const navigate=useNavigate()
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -25,11 +22,9 @@ const navigate=useNavigate()
     setErrors(validator({ ...userData, [e.target.name]: e.target.value }));
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
-  const handleRegister=()=>{
-    navigate('/register')
-   dispatch(access())
-   console.log('prueba')
-  }
+  const handleRegister = () => {
+    navigate("/register");
+  };
   return (
     <div>
       <img src={imgLogin} alt="" className={style.logo} />
@@ -74,11 +69,11 @@ const navigate=useNavigate()
           <img src={encabezado} alt="" className={style.encabezado} />
         </div>
       </form>
-        <div>
-          <button className={style.register} onClick={handleRegister}>
-            no tienes usuario? registrate
-          </button>
-        </div>
+      <div>
+        <button className={style.register} onClick={handleRegister}>
+          no tienes usuario? registrate
+        </button>
+      </div>
     </div>
   );
 };

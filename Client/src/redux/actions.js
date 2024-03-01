@@ -1,17 +1,17 @@
 import axios from "axios";
-const {REACT_APP_URL_BACKEND } = process.env;
-console.log(REACT_APP_URL_BACKEND)
+const { REACT_APP_URL_BACKEND } = process.env;
+console.log(REACT_APP_URL_BACKEND);
 export const addFav = (character) => {
   const endpoint = `${REACT_APP_URL_BACKEND}/fav`;
   return async (dispatch) => {
     try {
-      const {data} = await axios.post(endpoint, character);
+      const { data } = await axios.post(endpoint, character);
       dispatch({
         type: "ADD_FAV",
         payload: data,
       });
     } catch (error) {
-      console.error({error: error.message});
+      console.error({ error: error.message });
     }
   };
 };
@@ -26,7 +26,7 @@ export const removeFav = (id) => {
         payload: response.data,
       });
     } catch (error) {
-      console.error({error: error.message});
+      console.error({ error: error.message });
     }
   };
 };
@@ -44,8 +44,3 @@ export const orderCards = (order) => {
     payload: order,
   };
 };
-export const access=()=>{
-  return{
-    type:"ACCESS"
-  }
-}
