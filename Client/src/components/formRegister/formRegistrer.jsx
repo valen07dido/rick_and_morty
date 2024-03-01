@@ -1,12 +1,18 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import style from "./form.module.css";
 const FormRegistrer = () => {
-  const { access } = useSelector((state) => state);
-  console.log(access);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    window.alert("funcion aun en desarrollo 😁");
+  };
   return (
     <div className={style.container}>
-      <form action="" className={style.form}>
+      <form
+        action=""
+        className={style.form}
+        onSubmit={handleSubmit}
+        method="post"
+      >
         <h1>ingrese sus datos:</h1>
         <div className={style.inputGroup}>
           <input type="text" name="name" id="name" required />
